@@ -15,6 +15,9 @@
 		1701278B1A6FCD8D007ECAC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1701278A1A6FCD8D007ECAC3 /* Images.xcassets */; };
 		1701278E1A6FCD8D007ECAC3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1701278C1A6FCD8D007ECAC3 /* LaunchScreen.xib */; };
 		1701279A1A6FCD8D007ECAC3 /* Memo_memo_appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 170127991A6FCD8D007ECAC3 /* Memo_memo_appTests.m */; };
+		170127A41A6FCE1C007ECAC3 /* timer_custom_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170127A31A6FCE1C007ECAC3 /* timer_custom_view.xib */; };
+		170127A61A6FCE36007ECAC3 /* memo_custom_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */; };
+		170127A81A6FCE59007ECAC3 /* photo_custom_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,9 @@
 		170127931A6FCD8D007ECAC3 /* Memo_memo_appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Memo_memo_appTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		170127981A6FCD8D007ECAC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		170127991A6FCD8D007ECAC3 /* Memo_memo_appTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Memo_memo_appTests.m; sourceTree = "<group>"; };
+		170127A31A6FCE1C007ECAC3 /* timer_custom_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = timer_custom_view.xib; sourceTree = "<group>"; };
+		170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = memo_custom_view.xib; sourceTree = "<group>"; };
+		170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = photo_custom_view.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,9 @@
 				1701277F1A6FCD8D007ECAC3 /* AppDelegate.m */,
 				170127841A6FCD8D007ECAC3 /* ViewController.h */,
 				170127851A6FCD8D007ECAC3 /* ViewController.m */,
+				170127A31A6FCE1C007ECAC3 /* timer_custom_view.xib */,
+				170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */,
+				170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */,
 				170127871A6FCD8D007ECAC3 /* Main.storyboard */,
 				1701278A1A6FCD8D007ECAC3 /* Images.xcassets */,
 				1701278C1A6FCD8D007ECAC3 /* LaunchScreen.xib */,
@@ -205,6 +214,9 @@
 				170127891A6FCD8D007ECAC3 /* Main.storyboard in Resources */,
 				1701278E1A6FCD8D007ECAC3 /* LaunchScreen.xib in Resources */,
 				1701278B1A6FCD8D007ECAC3 /* Images.xcassets in Resources */,
+				170127A41A6FCE1C007ECAC3 /* timer_custom_view.xib in Resources */,
+				170127A81A6FCE59007ECAC3 /* photo_custom_view.xib in Resources */,
+				170127A61A6FCE36007ECAC3 /* memo_custom_view.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
