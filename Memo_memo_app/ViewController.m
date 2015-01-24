@@ -32,7 +32,7 @@
     count=arc4random_uniform(9);
     UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"timer_custom_view" owner:self options:nil][0];
     subview.frame = CGRectMake(100, count * 100, 100, 100);
-    
+
     [self setRandomColor:subview];
     [self.view addSubview:subview];
 }
