@@ -180,6 +180,7 @@
 				TargetAttributes = {
 					170127761A6FCD8D007ECAC3 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = K447NVD34Q;
 					};
 					170127921A6FCD8D007ECAC3 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -428,6 +429,7 @@
 				1701279F1A6FCD8D007ECAC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		170127A01A6FCD8D007ECAC3 /* Build configuration list for PBXNativeTarget "Memo_memo_appTests" */ = {
 			isa = XCConfigurationList;
@@ -436,6 +438,7 @@
 				170127A21A6FCD8D007ECAC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
