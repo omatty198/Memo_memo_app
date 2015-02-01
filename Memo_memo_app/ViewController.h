@@ -11,7 +11,7 @@
 @interface ViewController : UIViewController
 {
     NSMutableArray *cells;
-
+    UIScrollView *scroll_view;
 }
 
 @end
