@@ -18,7 +18,7 @@
     int size_x;
     int size_y;
     int general_size_y;//cellの配置されるスペースの広さ
-    
+    NSString *zahyo;//とりあえずの名前。
 }
 @end
 
@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,19 +103,20 @@
     else{//通常時
         
     }
+    zahyo=[NSString stringWithFormat:@"X%dY%d",x_origin,y_origin];
+    NSLog(@"%@",zahyo);
     x_2nd=(size_x/3)*x_origin;
-  [self tests];
+    [self tests];
 }
 
 -(void)tests{
     NSLog(@"X%dY%d",x_2nd,y_2nd);
-
+    
 }
 
 -(void)kesu_cell{
-//????????
+    //????????
 }
-
 
 
 @end
