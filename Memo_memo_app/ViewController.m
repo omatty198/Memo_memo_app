@@ -18,6 +18,7 @@
     int size_x;
     int size_y;
     int general_size_y;//cellの配置されるスペースの広さ
+    
 }
 @end
 
@@ -26,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,11 +104,17 @@
         
     }
     x_2nd=(size_x/3)*x_origin;
-    NSLog(@"%dx",x_2nd);
-    NSLog(@"%dy",y_2nd);
+  [self tests];
 }
 
+-(void)tests{
+    NSLog(@"X%dY%d",x_2nd,y_2nd);
 
+}
+
+-(void)kesu_cell{
+//????????
+}
 
 
 
