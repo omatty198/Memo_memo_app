@@ -76,7 +76,6 @@
     [subview addGestureRecognizer:tap];
     //-------------------------
     [array addObject:subview];
-    [array mutableCopy];//FIX: いるのか??
     [self seiretu];
     [self setRandomColor:subview];
     [self find_add_size];
@@ -87,7 +86,6 @@
     subview.frame = CGRectMake(x_2nd+10, y_2nd, 100, 100);//とりあえず+10して左詰めっぽくなるのは回避したけどせっかく画面サイズの取得までしたんで中央揃えするみたいな感じにしたいです。※size_x使えばうまくいけそうな感じがしました。
     [self seiretu];
     [array addObject:subview];
-    [array mutableCopy];
     [self setRandomColor:subview];
     [self    find_add_size];
     [self.view addSubview:subview];
@@ -97,7 +95,6 @@
     subview.frame = CGRectMake(x_2nd, y_2nd, 100, 100);
     [self seiretu];
     [array addObject:subview];
-    [array mutableCopy];
     [self setRandomColor:subview];
     [self    find_add_size];
     [self.view addSubview:subview];
