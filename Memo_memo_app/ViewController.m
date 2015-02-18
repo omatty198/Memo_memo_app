@@ -29,16 +29,23 @@
     [super viewDidLoad];
     // 可変配列の追加
     array = [NSMutableArray array];
+    //    [self haikei];
 }
 - (void)reuseView:(int)arrayCount subView:(UIView *)subView {
     //iを3で割った,余りが行列となる
-    int colomn = arrayCount % 3;
-    int row = arrayCount / 3;
+    int colomn =  arrayCount % 3;//横
+    int row = arrayCount / 3;//縦
     [UIView animateWithDuration:0.1f animations:^{
-        subView.frame = CGRectMake(120*colomn, 120*row, 100, 100);
+        subView.frame = CGRectMake(120*colomn+17, 120*row+10, 100, 100);
     }];
 }
-
+//-(void)haikei{
+//
+//    int k =1;
+//    NSString *img_name=[NSString stringWithFormat:@"cool%d",k];
+//    [haikei_view setImage:[UIImage imageNamed:img_name]];// imageNamed*ファイルの名前
+//
+//}
 - (void)tapAction:(id)sender {
     NSLog(@"age:%@",array);
     NSLog(@"LOG:%ld",array.count);
@@ -70,31 +77,50 @@
     int row = arrayNum / 3;
     
     UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"timer_custom_view" owner:self options:nil][0];
-    subview.frame = CGRectMake(120 * colomn, 120 * row , 100, 100);
+    subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
     //-------------------------
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    tap.numberOfTapsRequired = 2;//ダブルタップ
     [subview addGestureRecognizer:tap];
     //-------------------------
     [array addObject:subview];
-    [self seiretu];
+//    [self seiretu];
     [self setRandomColor:subview];
     [self find_add_size];
     [self.view addSubview:subview];
 }
 - (IBAction)add_memo_custom_view{//メモcell
+    int arrayNum = (int)array.count;
+    int colomn = arrayNum % 3;
+    int row = arrayNum / 3;
+    
     UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"memo_custom_view" owner:self options:nil][0];
-    subview.frame = CGRectMake(x_2nd+10, y_2nd, 100, 100);//とりあえず+10して左詰めっぽくなるのは回避したけどせっかく画面サイズの取得までしたんで中央揃えするみたいな感じにしたいです。※size_x使えばうまくいけそうな感じがしました。
-    [self seiretu];
+    subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
+    //-------------------------
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    tap.numberOfTapsRequired = 2;
+    [subview addGestureRecognizer:tap];
+    //-------------------------
     [array addObject:subview];
+//    [self seiretu];
     [self setRandomColor:subview];
-    [self    find_add_size];
+    [self find_add_size];
     [self.view addSubview:subview];
 }
 - (IBAction)photo_custom_view{//フォトcell
+    int arrayNum = (int)array.count;
+    int colomn = arrayNum % 3;
+    int row = arrayNum / 3;
+    
     UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"photo_custom_view" owner:self options:nil][0];
-    subview.frame = CGRectMake(x_2nd, y_2nd, 100, 100);
-    [self seiretu];
+    subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
+    //-------------------------
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    tap.numberOfTapsRequired = 2;
+    [subview addGestureRecognizer:tap];
+    //-------------------------
     [array addObject:subview];
+//    [self seiretu];
     [self setRandomColor:subview];
     [self    find_add_size];
     [self.view addSubview:subview];
@@ -103,8 +129,10 @@
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    CGFloat alpha = ( arc4random() % 200 / 256.0 ) + 0.5;
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
     subview.backgroundColor = color;
+    subview.alpha=1;
 }
 -(void)find_add_size{//画面サイズの取得
     size_x=[UIScreen mainScreen].bounds.size.width;
@@ -120,40 +148,38 @@
     }
     
 }
--(void)seiretu{//cellを並ばせます。ある意味一番大切？な所です
-    [self find_add_size];
-    x_origin++;
-    if(x_origin%3==0){//横列に全部入った場合
-        x_origin=0;
-        
-        y_origin++;//y座標を下げる
-        y_2nd=y_origin*120;
-        if(y_origin==5)//ジェスチャゾーンに入りそうな場合（将来的には画面スクロールできるようにするから消す
-        {
-            UIAlertView *alert =
-            [[UIAlertView alloc] initWithTitle:@"お知らせ" message:@"増やしすぎ!!"
-                                      delegate:self cancelButtonTitle:@"わかった。" otherButtonTitles:nil];
-            [alert show];
-        }
+//-(void)seiretu{//cellを並ばせます。ある意味一番大切？な所です
+//    [self find_add_size];
+//    x_origin++;
+//    if(x_origin%3==0){//横列に全部入った場合
+//        x_origin=0;
+//        
+//        y_origin++;//y座標を下げる
+//        y_2nd=y_origin*120;
+//        if(y_origin==5)//ジェスチャゾーンに入りそうな場合（将来的には画面スクロールできるようにするから消す
+//        {
+//            UIAlertView *alert =
+//            [[UIAlertView alloc] initWithTitle:@"お知らせ" message:@"増やしすぎ!!"
+//                                      delegate:self cancelButtonTitle:@"わかった。" otherButtonTitles:nil];
+//            [alert show];
+//        }
         //        x_origin=0;//メモが入りきれないのでx座標を戻す
         //        x_2nd=137.5*x_origin;
         //        y_2nd= 120*y_origin;
-    }
-    else{//通常時
-        
-    }
+//    }
+//    else{//通常時
+//        
+//    }
     //zahyo=[NSString stringWithFormat:@"X%dY%d",x_origin,y_origin];
     //NSLog(@"%@",zahyo);
-    x_2nd=(size_x/3)*x_origin;
-    [self tests];
-}
+//    x_2nd=(size_x/3)*x_origin;
+//    [self tests];
+//}
+//
+//-(void)tests{
+//    NSLog(@"X%dY%d",x_2nd,y_2nd);
+//    
+//}
 
--(void)tests{
-    NSLog(@"X%dY%d",x_2nd,y_2nd);
-    
-}
 
--(void)kesu_cell{
-    //????????
-}
 @end

@@ -12,6 +12,7 @@
 {
     NSMutableArray *cells;
     UIScrollView *scroll_view;
+//    IBOutlet UIImageView *haikei_view;
 }
 
 @end

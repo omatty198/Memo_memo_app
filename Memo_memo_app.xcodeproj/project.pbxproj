@@ -18,6 +18,7 @@
 		170127A41A6FCE1C007ECAC3 /* timer_custom_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170127A31A6FCE1C007ECAC3 /* timer_custom_view.xib */; };
 		170127A61A6FCE36007ECAC3 /* memo_custom_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */; };
 		170127A81A6FCE59007ECAC3 /* photo_custom_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */; };
+		17F919141A94CDF6006DCD92 /* cool1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 17F919161A94CDF6006DCD92 /* cool1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		170127A31A6FCE1C007ECAC3 /* timer_custom_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = timer_custom_view.xib; sourceTree = "<group>"; };
 		170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = memo_custom_view.xib; sourceTree = "<group>"; };
 		170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = photo_custom_view.xib; sourceTree = "<group>"; };
+		17F919151A94CDF6006DCD92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Base; path = Base.lproj/cool1.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				1701277F1A6FCD8D007ECAC3 /* AppDelegate.m */,
 				170127841A6FCD8D007ECAC3 /* ViewController.h */,
 				170127851A6FCD8D007ECAC3 /* ViewController.m */,
+				17F919161A94CDF6006DCD92 /* cool1.jpg */,
 				170127A31A6FCE1C007ECAC3 /* timer_custom_view.xib */,
 				170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */,
 				170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */,
@@ -215,6 +218,7 @@
 				170127891A6FCD8D007ECAC3 /* Main.storyboard in Resources */,
 				1701278E1A6FCD8D007ECAC3 /* LaunchScreen.xib in Resources */,
 				1701278B1A6FCD8D007ECAC3 /* Images.xcassets in Resources */,
+				17F919141A94CDF6006DCD92 /* cool1.jpg in Resources */,
 				170127A41A6FCE1C007ECAC3 /* timer_custom_view.xib in Resources */,
 				170127A81A6FCE59007ECAC3 /* photo_custom_view.xib in Resources */,
 				170127A61A6FCE36007ECAC3 /* memo_custom_view.xib in Resources */,
@@ -275,6 +279,15 @@
 				1701278D1A6FCD8D007ECAC3 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		17F919161A94CDF6006DCD92 /* cool1.jpg */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17F919151A94CDF6006DCD92 /* Base */,
+			);
+			name = cool1.jpg;
+			path = "壁紙";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
