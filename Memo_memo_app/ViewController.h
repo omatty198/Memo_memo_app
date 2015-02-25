@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface ViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UITextFieldDelegate>
 {
     NSMutableArray *cells;
     UIScrollView *scroll_view;

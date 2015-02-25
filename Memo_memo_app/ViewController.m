@@ -11,6 +11,9 @@
 
 @interface ViewController ()
 {
+    int hour;
+    int minute;
+    int second;
     int count;//test
     int x_origin;//cellの位置xを決定するための3メモ間共通の変数
     int y_origin;//
@@ -20,7 +23,7 @@
     int size_y;
     int general_size_y;//cellの配置されるスペースの広さ
     int viewCount;
-    NSMutableArray *array;
+    NSMutableArray *array;//セルの個数
     
     PhotoCustomView *photoSubView;
 }
@@ -78,7 +81,6 @@
     int arrayNum = (int)array.count;
     int colomn = arrayNum % 3;
     int row = arrayNum / 3;
-    
     UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"timer_custom_view" owner:self options:nil][0];
     subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
     //-------------------------
@@ -132,15 +134,34 @@
     tap.numberOfTapsRequired = 2;
     [photoSubView addGestureRecognizer:tap];
     //-------------------------
+    [self getting_photo];
     [array addObject:photoSubView];
     [self setRandomColor:photoSubView];
     [self find_add_size];
     //TODO: https://github.com/mixi-inc/iOSTraining/wiki/5.1-UIImagePickerController
     //上記URLを見ながら、UIImagePickerControllerを使ってみよう！
-    //??
-    //??
+    //
+    //
     //-------------------------
-//    [self.view addSubview:?????????];
+    [self.view addSubview:photoSubView];
+}
+-(void)getting_photo{
+    UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+    // UIImagePickerControllerSourceTypeSavedPhotosAlbum だと直接写真選択画面
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    // 選択したメディアの編集を可能にするかどうか
+    imagePickerVC.allowsEditing = YES;
+    
+    // 選択可能なメディアの制限 デフォルトは photo のみ。
+    // movie を選択可能にするには
+    // imagePickerVC.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:imagePickerVC.sourceType];
+    imagePickerVC.delegate = self;
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+
+}
+-(IBAction)context_of_timer{
+
+
 }
 - (void)setRandomColor:(UIView *)subview {//色
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
