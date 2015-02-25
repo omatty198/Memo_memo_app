@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "PhotoCustomView.h"
 
 @interface ViewController ()
 {
@@ -20,6 +21,8 @@
     int general_size_y;//cellの配置されるスペースの広さ
     int viewCount;
     NSMutableArray *array;
+    
+    PhotoCustomView *photoSubView;
 }
 @end
 
@@ -89,41 +92,55 @@
     [self find_add_size];
     [self.view addSubview:subview];
 }
+
 - (IBAction)add_memo_custom_view{//メモcell
-    int arrayNum = (int)array.count;
-    int colomn = arrayNum % 3;
-    int row = arrayNum / 3;
+        int arrayNum = (int)array.count;
+        int colomn = arrayNum % 3;
+        int row = arrayNum / 3;
     
     UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"memo_custom_view" owner:self options:nil][0];
-    subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
-    //-------------------------
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-    tap.numberOfTapsRequired = 2;
-    [subview addGestureRecognizer:tap];
-    //-------------------------
-    [array addObject:subview];
-//    [self seiretu];
-    [self setRandomColor:subview];
-    [self find_add_size];
-    [self.view addSubview:subview];
+        subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
+        //-------------------------
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        tap.numberOfTapsRequired = 2;
+        [subview addGestureRecognizer:tap];
+        //-------------------------
+        [array addObject:subview];
+    //    [self seiretu];
+        [self setRandomColor:subview];
+        [self find_add_size];
+        [self.view addSubview:subview];
+
+
+}
+//写真を選択し終わった時に呼び出されるdelegateメソッド
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    //生成するphoto_custom_viewのUIImageViewに選んだ写真をセットしているよ！
+    [photoSubView.photoImageView setImage:info[UIImagePickerControllerOriginalImage]];
 }
 - (IBAction)photo_custom_view{//フォトcell
     int arrayNum = (int)array.count;
     int colomn = arrayNum % 3;
     int row = arrayNum / 3;
     
-    UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"photo_custom_view" owner:self options:nil][0];
-    subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
+    photoSubView = [[NSBundle mainBundle] loadNibNamed:@"photo_custom_view" owner:self options:nil][0];
+    photoSubView.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
     //-------------------------
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     tap.numberOfTapsRequired = 2;
-    [subview addGestureRecognizer:tap];
+    [photoSubView addGestureRecognizer:tap];
     //-------------------------
-    [array addObject:subview];
-//    [self seiretu];
-    [self setRandomColor:subview];
-    [self    find_add_size];
-    [self.view addSubview:subview];
+    [array addObject:photoSubView];
+    [self setRandomColor:photoSubView];
+    [self find_add_size];
+    //TODO: https://github.com/mixi-inc/iOSTraining/wiki/5.1-UIImagePickerController
+    //上記URLを見ながら、UIImagePickerControllerを使ってみよう！
+    //??
+    //??
+    //-------------------------
+//    [self.view addSubview:?????????];
 }
 - (void)setRandomColor:(UIView *)subview {//色
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0

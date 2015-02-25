@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1701277D1A6FCD8D007ECAC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1701277C1A6FCD8D007ECAC3 /* main.m */; };
 		170127801A6FCD8D007ECAC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1701277F1A6FCD8D007ECAC3 /* AppDelegate.m */; };
-		170127831A6FCD8D007ECAC3 /* Memo_memo_app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 170127811A6FCD8D007ECAC3 /* Memo_memo_app.xcdatamodeld */; };
 		170127861A6FCD8D007ECAC3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170127851A6FCD8D007ECAC3 /* ViewController.m */; };
 		170127891A6FCD8D007ECAC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 170127871A6FCD8D007ECAC3 /* Main.storyboard */; };
 		1701278B1A6FCD8D007ECAC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1701278A1A6FCD8D007ECAC3 /* Images.xcassets */; };
@@ -19,6 +18,7 @@
 		170127A61A6FCE36007ECAC3 /* memo_custom_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */; };
 		170127A81A6FCE59007ECAC3 /* photo_custom_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */; };
 		17F919141A94CDF6006DCD92 /* cool1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 17F919161A94CDF6006DCD92 /* cool1.jpg */; };
+		2CF521EE1A9831EC0052A8B5 /* PhotoCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF521ED1A9831EC0052A8B5 /* PhotoCustomView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,6 @@
 		1701277C1A6FCD8D007ECAC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1701277E1A6FCD8D007ECAC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1701277F1A6FCD8D007ECAC3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		170127821A6FCD8D007ECAC3 /* Memo_memo_app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Memo_memo_app.xcdatamodel; sourceTree = "<group>"; };
 		170127841A6FCD8D007ECAC3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		170127851A6FCD8D007ECAC3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		170127881A6FCD8D007ECAC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,6 +49,8 @@
 		170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = memo_custom_view.xib; sourceTree = "<group>"; };
 		170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = photo_custom_view.xib; sourceTree = "<group>"; };
 		17F919151A94CDF6006DCD92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Base; path = Base.lproj/cool1.jpg; sourceTree = "<group>"; };
+		2CF521EC1A9831EC0052A8B5 /* PhotoCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCustomView.h; sourceTree = "<group>"; };
+		2CF521ED1A9831EC0052A8B5 /* PhotoCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCustomView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +99,12 @@
 				17F919161A94CDF6006DCD92 /* cool1.jpg */,
 				170127A31A6FCE1C007ECAC3 /* timer_custom_view.xib */,
 				170127A51A6FCE36007ECAC3 /* memo_custom_view.xib */,
+				2CF521EC1A9831EC0052A8B5 /* PhotoCustomView.h */,
+				2CF521ED1A9831EC0052A8B5 /* PhotoCustomView.m */,
 				170127A71A6FCE59007ECAC3 /* photo_custom_view.xib */,
 				170127871A6FCD8D007ECAC3 /* Main.storyboard */,
 				1701278A1A6FCD8D007ECAC3 /* Images.xcassets */,
 				1701278C1A6FCD8D007ECAC3 /* LaunchScreen.xib */,
-				170127811A6FCD8D007ECAC3 /* Memo_memo_app.xcdatamodeld */,
 				1701277A1A6FCD8D007ECAC3 /* Supporting Files */,
 			);
 			path = Memo_memo_app;
@@ -242,7 +244,7 @@
 				170127801A6FCD8D007ECAC3 /* AppDelegate.m in Sources */,
 				1701277D1A6FCD8D007ECAC3 /* main.m in Sources */,
 				170127861A6FCD8D007ECAC3 /* ViewController.m in Sources */,
-				170127831A6FCD8D007ECAC3 /* Memo_memo_app.xcdatamodeld in Sources */,
+				2CF521EE1A9831EC0052A8B5 /* PhotoCustomView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,19 +456,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		170127811A6FCD8D007ECAC3 /* Memo_memo_app.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				170127821A6FCD8D007ECAC3 /* Memo_memo_app.xcdatamodel */,
-			);
-			currentVersion = 170127821A6FCD8D007ECAC3 /* Memo_memo_app.xcdatamodel */;
-			path = Memo_memo_app.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 1701276F1A6FCD8D007ECAC3 /* Project object */;
 }
