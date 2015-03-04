@@ -72,6 +72,7 @@
         }
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -94,7 +95,6 @@
     [self find_add_size];
     [self.view addSubview:subview];
 }
-
 - (IBAction)add_memo_custom_view{//メモcell
         int arrayNum = (int)array.count;
         int colomn = arrayNum % 3;
@@ -159,10 +159,7 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 
 }
--(IBAction)context_of_timer{
 
-
-}
 - (void)setRandomColor:(UIView *)subview {//色
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
