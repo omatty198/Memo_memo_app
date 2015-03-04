@@ -11,27 +11,36 @@
 
 @interface ViewController ()
 {
-    int hour;
-    int minute;
-    int second;
+    
     int count;//test
     int x_origin;//cellの位置xを決定するための3メモ間共通の変数
     int y_origin;//
     int x_2nd;//cellの位置y(決定用
-    int y_2nd;//
+    int y_2nd;
     int size_x;
     int size_y;
     int general_size_y;//cellの配置されるスペースの広さ
     int viewCount;
     NSMutableArray *array;//セルの個数
-    
     PhotoCustomView *photoSubView;
 }
 @end
 
 @implementation ViewController
 
+-(IBAction)timer_start{
+  timer_cell=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(second_up) userInfo:nil repeats:NO];
+}
+-(void)second_up{
+    second++;
+    time_label.text=[NSString stringWithFormat:@"%d",second];
+}
+-(IBAction)timer_stop{}
+
 - (void)viewDidLoad {
+    second=0;
+    minute=0;
+    hour=0;
     [super viewDidLoad];
     // 可変配列の追加
     array = [NSMutableArray array];
@@ -90,30 +99,30 @@
     [subview addGestureRecognizer:tap];
     //-------------------------
     [array addObject:subview];
-//    [self seiretu];
+    //    [self seiretu];
     [self setRandomColor:subview];
     [self find_add_size];
     [self.view addSubview:subview];
 }
 - (IBAction)add_memo_custom_view{//メモcell
-        int arrayNum = (int)array.count;
-        int colomn = arrayNum % 3;
-        int row = arrayNum / 3;
+    int arrayNum = (int)array.count;
+    int colomn = arrayNum % 3;
+    int row = arrayNum / 3;
     
     UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"memo_custom_view" owner:self options:nil][0];
-        subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
-        //-------------------------
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        tap.numberOfTapsRequired = 2;
-        [subview addGestureRecognizer:tap];
-        //-------------------------
-        [array addObject:subview];
+    subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
+    //-------------------------
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    tap.numberOfTapsRequired = 2;
+    [subview addGestureRecognizer:tap];
+    //-------------------------
+    [array addObject:subview];
     //    [self seiretu];
-        [self setRandomColor:subview];
-        [self find_add_size];
-        [self.view addSubview:subview];
-
-
+    [self setRandomColor:subview];
+    [self find_add_size];
+    [self.view addSubview:subview];
+    
+    
 }
 //写真を選択し終わった時に呼び出されるdelegateメソッド
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -157,7 +166,7 @@
     // imagePickerVC.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:imagePickerVC.sourceType];
     imagePickerVC.delegate = self;
     [self presentViewController:imagePickerVC animated:YES completion:nil];
-
+    
 }
 
 - (void)setRandomColor:(UIView *)subview {//色
@@ -188,7 +197,7 @@
 //    x_origin++;
 //    if(x_origin%3==0){//横列に全部入った場合
 //        x_origin=0;
-//        
+//
 //        y_origin++;//y座標を下げる
 //        y_2nd=y_origin*120;
 //        if(y_origin==5)//ジェスチャゾーンに入りそうな場合（将来的には画面スクロールできるようにするから消す
@@ -198,22 +207,22 @@
 //                                      delegate:self cancelButtonTitle:@"わかった。" otherButtonTitles:nil];
 //            [alert show];
 //        }
-        //        x_origin=0;//メモが入りきれないのでx座標を戻す
-        //        x_2nd=137.5*x_origin;
-        //        y_2nd= 120*y_origin;
+//        x_origin=0;//メモが入りきれないのでx座標を戻す
+//        x_2nd=137.5*x_origin;
+//        y_2nd= 120*y_origin;
 //    }
 //    else{//通常時
-//        
+//
 //    }
-    //zahyo=[NSString stringWithFormat:@"X%dY%d",x_origin,y_origin];
-    //NSLog(@"%@",zahyo);
+//zahyo=[NSString stringWithFormat:@"X%dY%d",x_origin,y_origin];
+//NSLog(@"%@",zahyo);
 //    x_2nd=(size_x/3)*x_origin;
 //    [self tests];
 //}
 //
 //-(void)tests{
 //    NSLog(@"X%dY%d",x_2nd,y_2nd);
-//    
+//
 //}
 
 

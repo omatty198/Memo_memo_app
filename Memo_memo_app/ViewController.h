@@ -12,8 +12,17 @@
 {
     NSMutableArray *cells;
     UIScrollView *scroll_view;
+    int hour;
+    int minute;
+    int second;
+    
+    IBOutlet UILabel *time_label;
+    
+    NSTimer *timer_cell;
 //    IBOutlet UIImageView *haikei_view;
 }
-
+-(IBAction)timer_start;
+-(IBAction)timer_stop;
+-(IBAction)second_up;
 @end
 
