@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 kolonzu. All rights reserved.
 //
 
-#ifndef Memo_memo_app_timer_custom_view_h
-#define Memo_memo_app_timer_custom_view_h
+#import <UIKit/UIKit.h>
 
+@interface timer_custom_view : UIView
 
-#endif
+@end

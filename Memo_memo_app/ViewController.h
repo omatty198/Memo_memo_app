@@ -18,7 +18,6 @@
     
     IBOutlet UILabel *time_label;
     
-    NSTimer *timer_cell;
 //    IBOutlet UIImageView *haikei_view;
 }
 -(IBAction)timer_start;

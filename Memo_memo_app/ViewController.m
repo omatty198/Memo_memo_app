@@ -28,15 +28,6 @@
 
 @implementation ViewController
 
--(IBAction)timer_start{
-  timer_cell=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(second_up) userInfo:nil repeats:NO];
-}
--(void)second_up{
-    second++;
-    time_label.text=[NSString stringWithFormat:@"%d",second];
-}
--(IBAction)timer_stop{}
-
 - (void)viewDidLoad {
     second=0;
     minute=0;
