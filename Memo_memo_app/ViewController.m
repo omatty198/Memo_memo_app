@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PhotoCustomView.h"
+#import "timer_custom_view.h"
 
 @interface ViewController ()
 {
@@ -35,8 +36,39 @@
     [super viewDidLoad];
     // 可変配列の追加
     array = [NSMutableArray array];
-    //    [self haikei];
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSArray *tempArray = [ud objectForKey:@"array"];
+    array = [NSMutableArray array];
+    for (NSData *data in tempArray) {
+        //TODO: NSDataにアーカイブしているので、その変換をしないといけない！
+        NSLog(@"%@",[NSKeyedUnarchiver unarchiveObjectWithData:data]);
+        [array addObject:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+    }
+    for (UIView *subView in array) {
+        [self.view addSubview:subView];
+    }
+}
+//http://d.hatena.ne.jp/glass-_-onion/20110904/1315145330
+- (void)archiveSubview {
+    //TODO: このタイミングで保存する
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSLog(@"保存する個数:%ld",array.count);
+    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:array.count];
+    for (timer_custom_view *object in array) {
+        NSLog(@"%@",object.class);
+        //正しいobjectをアーカイブする
+        NSData *personEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:object];
+        [archiveArray addObject:personEncodedObject];
+    }
+    [ud setObject:archiveArray forKey:@"array"];
+    [ud synchronize];
+    //NSLog(@"%@",[ud objectForKey:@"array"]);
+    
+}
+
 - (void)reuseView:(int)arrayCount subView:(UIView *)subView {
     //iを3で割った,余りが行列となる
     int colomn =  arrayCount % 3;//横
@@ -82,14 +114,16 @@
     int arrayNum = (int)array.count;
     int colomn = arrayNum % 3;
     int row = arrayNum / 3;
-    UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"timer_custom_view" owner:self options:nil][0];
+    timer_custom_view *subview = [timer_custom_view view];
     subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
+    subview.time_label.text = @"label";
     //-------------------------
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     tap.numberOfTapsRequired = 2;//ダブルタップ
     [subview addGestureRecognizer:tap];
     //-------------------------
     [array addObject:subview];
+    [self archiveSubview];
     //    [self seiretu];
     [self setRandomColor:subview];
     [self find_add_size];
@@ -108,6 +142,7 @@
     [subview addGestureRecognizer:tap];
     //-------------------------
     [array addObject:subview];
+    [self archiveSubview];
     //    [self seiretu];
     [self setRandomColor:subview];
     [self find_add_size];
@@ -133,16 +168,11 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     tap.numberOfTapsRequired = 2;
     [photoSubView addGestureRecognizer:tap];
-    //-------------------------
     [self getting_photo];
     [array addObject:photoSubView];
+    [self archiveSubview];
     [self setRandomColor:photoSubView];
     [self find_add_size];
-    //TODO: https://github.com/mixi-inc/iOSTraining/wiki/5.1-UIImagePickerController
-    //上記URLを見ながら、UIImagePickerControllerを使ってみよう！
-    //
-    //
-    //-------------------------
     [self.view addSubview:photoSubView];
 }
 -(void)getting_photo{
