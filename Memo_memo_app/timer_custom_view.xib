@@ -13,7 +13,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzL-Z6-6Wv">
                     <rect key="frame" x="8" y="19" width="96" height="35"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HB8-2s-9Oj">
@@ -30,6 +30,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="time_label" destination="kzL-Z6-6Wv" id="7g9-k5-xKF"/>
+                <outlet property="timer_button" destination="HB8-2s-9Oj" id="dAZ-fB-d7k"/>
             </connections>
             <point key="canvasLocation" x="359" y="328"/>
         </view>

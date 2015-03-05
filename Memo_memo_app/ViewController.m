@@ -39,34 +39,47 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSArray *tempArray = [ud objectForKey:@"array"];
-    array = [NSMutableArray array];
-    for (NSData *data in tempArray) {
-        //TODO: NSDataにアーカイブしているので、その変換をしないといけない！
-        NSLog(@"%@",[NSKeyedUnarchiver unarchiveObjectWithData:data]);
-        [array addObject:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+    NSString *directory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *filePath = [directory stringByAppendingPathComponent:@"data.dat"];
+    NSArray *array2 = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    if (array2) {
+        NSLog(@"配列の個数:%ld",array2.count);
+        for (NSObject *object in array2) {
+            if ([object isKindOfClass:[timer_custom_view class]]) {
+                NSLog(@"timerCutstomView objectです");
+                //TODO: 中身を復旧させる
+                [self.view addSubview:(timer_custom_view *)object];
+            } else if ([object isKindOfClass:[PhotoCustomView class]]) {
+                NSLog(@"PhotoCustomView objectです");
+                [self.view addSubview:(PhotoCustomView *)object];
+            } else if ([object isKindOfClass:[NSString class]]) {
+                
+            } else {
+                NSLog(@"不明なobjectです");
+            }
+        }
+    } else {
+        NSLog(@"%@", @"データが存在しません。");
     }
-    for (UIView *subView in array) {
-        [self.view addSubview:subView];
-    }
+    NSString *str = [NSString stringWithFormat:@"%ld",array2.count];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"AlertView"
+                                                        message:str
+                                                       delegate:self
+                                              cancelButtonTitle:@"いいえ"
+                                              otherButtonTitles:nil, nil];
+    [alertView show];
 }
 //http://d.hatena.ne.jp/glass-_-onion/20110904/1315145330
 - (void)archiveSubview {
-    //TODO: このタイミングで保存する
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSLog(@"保存する個数:%ld",array.count);
-    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:array.count];
-    for (timer_custom_view *object in array) {
-        NSLog(@"%@",object.class);
-        //正しいobjectをアーカイブする
-        NSData *personEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:object];
-        [archiveArray addObject:personEncodedObject];
+    NSString *directory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *filePath = [directory stringByAppendingPathComponent:@"data.dat"];
+    BOOL successful = [NSKeyedArchiver archiveRootObject:array toFile:filePath];
+    if (successful) {
+        NSLog(@"データの保存に成功しました");
+    } else {
+        NSLog(@"データの保存に失敗しました");
     }
-    [ud setObject:archiveArray forKey:@"array"];
-    [ud synchronize];
-    //NSLog(@"%@",[ud objectForKey:@"array"]);
-    
 }
 
 - (void)reuseView:(int)arrayCount subView:(UIView *)subView {
@@ -77,13 +90,6 @@
         subView.frame = CGRectMake(120*colomn+17, 120*row+10, 100, 100);
     }];
 }
-//-(void)haikei{
-//
-//    int k =1;
-//    NSString *img_name=[NSString stringWithFormat:@"cool%d",k];
-//    [haikei_view setImage:[UIImage imageNamed:img_name]];// imageNamed*ファイルの名前
-//
-//}
 - (void)tapAction:(id)sender {
     NSLog(@"age:%@",array);
     NSLog(@"LOG:%ld",array.count);
@@ -116,7 +122,6 @@
     int row = arrayNum / 3;
     timer_custom_view *subview = [timer_custom_view view];
     subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
-    subview.time_label.text = @"label";
     //-------------------------
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     tap.numberOfTapsRequired = 2;//ダブルタップ
@@ -213,38 +218,5 @@
     }
     
 }
-//-(void)seiretu{//cellを並ばせます。ある意味一番大切？な所です
-//    [self find_add_size];
-//    x_origin++;
-//    if(x_origin%3==0){//横列に全部入った場合
-//        x_origin=0;
-//
-//        y_origin++;//y座標を下げる
-//        y_2nd=y_origin*120;
-//        if(y_origin==5)//ジェスチャゾーンに入りそうな場合（将来的には画面スクロールできるようにするから消す
-//        {
-//            UIAlertView *alert =
-//            [[UIAlertView alloc] initWithTitle:@"お知らせ" message:@"増やしすぎ!!"
-//                                      delegate:self cancelButtonTitle:@"わかった。" otherButtonTitles:nil];
-//            [alert show];
-//        }
-//        x_origin=0;//メモが入りきれないのでx座標を戻す
-//        x_2nd=137.5*x_origin;
-//        y_2nd= 120*y_origin;
-//    }
-//    else{//通常時
-//
-//    }
-//zahyo=[NSString stringWithFormat:@"X%dY%d",x_origin,y_origin];
-//NSLog(@"%@",zahyo);
-//    x_2nd=(size_x/3)*x_origin;
-//    [self tests];
-//}
-//
-//-(void)tests{
-//    NSLog(@"X%dY%d",x_2nd,y_2nd);
-//
-//}
-
 
 @end

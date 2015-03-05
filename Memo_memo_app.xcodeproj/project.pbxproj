@@ -193,10 +193,11 @@
 				TargetAttributes = {
 					170127761A6FCD8D007ECAC3 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = K447NVD34Q;
+						DevelopmentTeam = TJE6WSW95R;
 					};
 					170127921A6FCD8D007ECAC3 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = TJE6WSW95R;
 						TestTargetID = 170127761A6FCD8D007ECAC3;
 					};
 				};

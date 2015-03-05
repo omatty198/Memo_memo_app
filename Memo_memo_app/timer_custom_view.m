@@ -13,18 +13,22 @@
 //- (id)initWithCoder:(NSCoder *)decoder
 //{
 //    self = [super init];
-//    if (self && [decoder decodeIntForKey:@"second"] && [decoder decodeObjectForKey:@"time_label"]) {
+//    if (self) {
 //        _second = [decoder decodeIntForKey:@"second"];
 //        _time_label = [decoder decodeObjectForKey:@"time_label"];
+//        if (_second == 0 && _time_label == nil) {
+//            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 19, 96, 35)];
+//            label.text = [NSString stringWithFormat:@"%d",_second];
+//            _time_label = label;
+//            [self addSubview:_time_label];
+//            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(34, 62, 33, 30)];
+//            [button setTitle:@"START" forState:UIControlStateNormal];
+//            _timer_button = button;
+//            [self addSubview:_timer_button];
+//        }
 //    }
 //    return self;
 //}
-//オブジェクトをアーカイブするときに呼ばれるメソッド
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    [encoder encodeInt:self.second forKey:@"second"];
-    [encoder encodeObject:self.time_label forKey:@"time_label"];
-}
 + (instancetype)view
 {
     NSString *className = NSStringFromClass([self class]);
