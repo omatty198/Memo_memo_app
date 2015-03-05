@@ -32,30 +32,30 @@
 
 #pragma mark - view life cycle
 - (void)viewDidLoad {
-    second=5;
-    minute=0;
-    hour=0;
     [super viewDidLoad];
-    // 可変配列の追加
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSString *directory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *filePath = [directory stringByAppendingPathComponent:@"data.dat"];
     NSArray *array2 = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-    cell_array = [array2 mutableCopy];
+    if (array2) {
+        cell_array = [array2 mutableCopy];
+    } else {
+        cell_array = [NSMutableArray array];
+    }
     if (array2) {
         NSLog(@"配列の個数:%ld",array2.count);
         for (NSObject *object in array2) {
             if ([object isKindOfClass:[timer_custom_view class]]) {
                 NSLog(@"timerCutstomView objectです");
-                timer_custom_view *imgCopy = (timer_custom_view *)object;
-                NSLog(@"%@, %@", imgCopy, NSStringFromCGSize(imgCopy.frame.size));
+                timer_custom_view *timerCopy = (timer_custom_view *)object;
+                NSLog(@"%@, %@", timerCopy, NSStringFromCGSize(timerCopy.frame.size));
                 //TODO: buttonが機能をなしていない
                 //imgCopy = [timer_custom_view view];
                 //[imgCopy.timer_button addTarget:self action:@selector(hoge:) forControlEvents:UIControlEventTouchUpInside];
-                [self.view addSubview:imgCopy];
-                NSString *str = [NSString stringWithFormat:@"Size:%@",NSStringFromCGSize(imgCopy.frame.size)];
+                [self.view addSubview:timerCopy];
+                NSString *str = [NSString stringWithFormat:@"Size:%@",NSStringFromCGSize(timerCopy.frame.size)];
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"AlertView"
                                                                     message:str
                                                                    delegate:self
@@ -64,8 +64,10 @@
                 [alertView show];
             } else if ([object isKindOfClass:[PhotoCustomView class]]) {
                 NSLog(@"PhotoCustomView objectです");
+                PhotoCustomView *imgCopy = (PhotoCustomView *)object;
+                NSLog(@"%@, %@", imgCopy, NSStringFromCGSize(imgCopy.frame.size));
                 //TODO: 中身を復旧させる
-                [self.view addSubview:(PhotoCustomView *)object];
+                [self.view addSubview:imgCopy];
             } else if ([object isKindOfClass:[NSString class]]) {//NSStringではなく、memo_custom_view
                 
             } else {
@@ -76,25 +78,6 @@
         NSLog(@"%@", @"データが存在しません。");
     }
 
-}
-- (void)hoge:(UIButton *)sender{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"AlertView"
-                                                        message:@"age"
-                                                       delegate:self
-                                              cancelButtonTitle:@"いいえ"
-                                              otherButtonTitles:nil, nil];
-    [alertView show];
-//    UIButton *sender = (UIButton *)senderButton;
-    sender.selected = !sender.selected;
-    if (sender.selected) {
-        timer_cell=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(second_up) userInfo:nil repeats:YES];
-        NSLog(@"yes");
-        //self.second = 2;
-        
-    } else {
-        NSLog(@"no");
-        [timer_cell invalidate];
-    }
 }
 //http://d.hatena.ne.jp/glass-_-onion/20110904/1315145330
 - (void)archiveSubview {
