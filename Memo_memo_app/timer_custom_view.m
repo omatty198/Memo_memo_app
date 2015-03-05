@@ -34,8 +34,10 @@
     NSString *className = NSStringFromClass([self class]);
     return [[[NSBundle mainBundle] loadNibNamed:className owner:nil options:0] firstObject];
 }
-- (IBAction)timerButton:(UIButton *)sender {
+- (IBAction)timerButton:(id)senderButton {
+    [self.delegate timerButton:self];
     //TODO: if で timerの初期化と、
+    UIButton *sender = (UIButton *)senderButton;
     sender.selected = !sender.selected;
     if (sender.selected) {
         timer_cell=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(second_up) userInfo:nil repeats:YES];

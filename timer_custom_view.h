@@ -8,14 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol timer_custom_viewProtocol<NSObject>
+- (void)timerButton:(id)senderButton;
+@end
+
 @interface timer_custom_view : UIView
 {
     NSTimer *timer_cell;
 }
+@property (nonatomic, weak) id<timer_custom_viewProtocol> delegate;
 
 @property (nonatomic) int second;
 @property (nonatomic,weak) IBOutlet UILabel *time_label;
 @property (nonatomic,weak) IBOutlet UIButton *timer_button;
 + (instancetype)view;
-- (IBAction)timerButton:(UIButton *)sender;
+
 @end

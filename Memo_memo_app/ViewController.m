@@ -24,6 +24,7 @@
     int viewCount;
     NSMutableArray *cell_array;//セルの個数
     PhotoCustomView *photoSubView;
+    NSTimer *timer_cell;
 }
 @end
 
@@ -36,13 +37,13 @@
     hour=0;
     [super viewDidLoad];
     // 可変配列の追加
-    cell_array = [NSMutableArray array];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSString *directory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *filePath = [directory stringByAppendingPathComponent:@"data.dat"];
     NSArray *array2 = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    cell_array = [array2 mutableCopy];
     if (array2) {
         NSLog(@"配列の個数:%ld",array2.count);
         for (NSObject *object in array2) {
@@ -51,7 +52,7 @@
                 timer_custom_view *imgCopy = (timer_custom_view *)object;
                 NSLog(@"%@, %@", imgCopy, NSStringFromCGSize(imgCopy.frame.size));
                 //TODO: buttonが機能をなしていない
-                [self hogehoge:imgCopy];
+                //imgCopy = [timer_custom_view view];
                 //[imgCopy.timer_button addTarget:self action:@selector(hoge:) forControlEvents:UIControlEventTouchUpInside];
                 [self.view addSubview:imgCopy];
                 NSString *str = [NSString stringWithFormat:@"Size:%@",NSStringFromCGSize(imgCopy.frame.size)];
@@ -76,13 +77,24 @@
     }
 
 }
-- (void)hoge:(UIButton *)button{
+- (void)hoge:(UIButton *)sender{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"AlertView"
                                                         message:@"age"
                                                        delegate:self
                                               cancelButtonTitle:@"いいえ"
                                               otherButtonTitles:nil, nil];
     [alertView show];
+//    UIButton *sender = (UIButton *)senderButton;
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        timer_cell=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(second_up) userInfo:nil repeats:YES];
+        NSLog(@"yes");
+        //self.second = 2;
+        
+    } else {
+        NSLog(@"no");
+        [timer_cell invalidate];
+    }
 }
 //http://d.hatena.ne.jp/glass-_-onion/20110904/1315145330
 - (void)archiveSubview {
@@ -244,4 +256,10 @@
     timerView.timer_button = button;
     [timerView addSubview:button];
 }
+//-(void)second_up{
+//    timer_custom_view sec
+//}
+//- (IBAction)timerButton:(id)senderButton {
+//    
+//}
 @end
