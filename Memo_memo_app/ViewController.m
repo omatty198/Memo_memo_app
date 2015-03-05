@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "PhotoCustomView.h"
 #import "timer_custom_view.h"
+#import "MemoCustomView.h"
 
 @interface ViewController ()
 {
@@ -23,8 +24,10 @@
     int general_size_y;//cellの配置されるスペースの広さ
     int viewCount;
     NSMutableArray *cell_array;//セルの個数
-    PhotoCustomView *photoSubView;
     NSTimer *timer_cell;
+    MemoCustomView *memoCopy;
+    PhotoCustomView *photoSubView;
+    NSMutableString *myText;
 }
 @end
 
@@ -68,8 +71,11 @@
                 NSLog(@"%@, %@", imgCopy, NSStringFromCGSize(imgCopy.frame.size));
                 //TODO: 中身を復旧させる
                 [self.view addSubview:imgCopy];
-            } else if ([object isKindOfClass:[NSString class]]) {//NSStringではなく、memo_custom_view
-                
+            } else if ([object isKindOfClass:[MemoCustomView class]]) {//NSStringではなく、memo_custom_view
+                MemoCustomView *memoCopy = (MemoCustomView *)object;
+                [memoCopy getTextViewContents];
+                //配列に入れなおす。
+                [self.view addSubview:memoCopy];
             } else {
                 NSLog(@"不明なobjectです");
             }
@@ -119,21 +125,50 @@
     int colomn = arrayNum % 3;
     int row = arrayNum / 3;
     
-    UIView *subview = [[NSBundle mainBundle] loadNibNamed:@"memo_custom_view" owner:self options:nil][0];
-    subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
+    memoCopy = [[NSBundle mainBundle] loadNibNamed:@"memo_custom_view" owner:self options:nil][0];
+    memoCopy.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
     //-------------------------
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     tap.numberOfTapsRequired = 2;
-    [subview addGestureRecognizer:tap];
+    [memoCopy addGestureRecognizer:tap];
     //-------------------------
-    [cell_array addObject:subview];
+    [cell_array addObject:memoCopy];
     [self archiveSubview];
     //    [self seiretu];
-    [self setRandomColor:subview];
+    [self setRandomColor:memoCopy];
     [self find_add_size];
-    [self.view addSubview:subview];
+    memoCopy.textView.delegate = self;
+    [self.view addSubview:memoCopy];
     
+}
+#pragma - mark UITextViewDelegate
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    int maxInputLength = 3;
+    myText = [memoCopy.textView.text mutableCopy];
+    [myText replaceCharactersInRange:range withString:text];
     
+    if ([myText length] > maxInputLength) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"文字数制限"
+                              message:@"3文字以下で入力して下さい"
+                              delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:@"OK", nil
+                              ];
+        [alert show];
+        
+        return NO;
+    }
+    //[cell_array removeObject:memoCopy];
+    [self setTextViewContents];
+    [cell_array addObject:memoCopy];
+    return YES;
+}
+- (void)setTextViewContents {
+    NSLog(@"つくるよ");
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:myText forKey:@"textView"];
+    [ud synchronize];
 }
 - (IBAction)photo_custom_view{//フォトcell
     int arrayNum = (int)cell_array.count;
@@ -230,6 +265,5 @@
         scroll_view.contentSize = CGSizeMake(414,736 /* +subview.frame.size.height*/);
         NSLog(@"%d",size_x);
     }
-    
 }
 @end

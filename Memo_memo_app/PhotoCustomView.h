@@ -10,4 +10,5 @@
 
 @interface PhotoCustomView : UIView
 @property (nonatomic,weak) IBOutlet UIImageView *photoImageView;
+
 @end
