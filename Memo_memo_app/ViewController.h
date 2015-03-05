@@ -10,18 +10,10 @@
 
 @interface ViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UITextFieldDelegate>
 {
-    NSMutableArray *cells;
     UIScrollView *scroll_view;
     int hour;
     int minute;
     int second;
-    
-    IBOutlet UILabel *time_label;
-    
-//    IBOutlet UIImageView *haikei_view;
 }
--(IBAction)timer_start;
--(IBAction)timer_stop;
--(IBAction)second_up;
 @end
 

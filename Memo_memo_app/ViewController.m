@@ -22,20 +22,21 @@
     int size_y;
     int general_size_y;//cellの配置されるスペースの広さ
     int viewCount;
-    NSMutableArray *array;//セルの個数
+    NSMutableArray *cell_array;//セルの個数
     PhotoCustomView *photoSubView;
 }
 @end
 
 @implementation ViewController
 
+#pragma mark - view life cycle
 - (void)viewDidLoad {
     second=5;
     minute=0;
     hour=0;
     [super viewDidLoad];
     // 可変配列の追加
-    array = [NSMutableArray array];
+    cell_array = [NSMutableArray array];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -71,10 +72,10 @@
 }
 //http://d.hatena.ne.jp/glass-_-onion/20110904/1315145330
 - (void)archiveSubview {
-    NSLog(@"保存する個数:%ld",array.count);
+    NSLog(@"保存する個数:%ld",cell_array.count);
     NSString *directory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *filePath = [directory stringByAppendingPathComponent:@"data.dat"];
-    BOOL successful = [NSKeyedArchiver archiveRootObject:array toFile:filePath];
+    BOOL successful = [NSKeyedArchiver archiveRootObject:cell_array toFile:filePath];
     if (successful) {
         NSLog(@"データの保存に成功しました");
     } else {
@@ -82,42 +83,11 @@
     }
 }
 
-- (void)reuseView:(int)arrayCount subView:(UIView *)subView {
-    //iを3で割った,余りが行列となる
-    int colomn =  arrayCount % 3;//横
-    int row = arrayCount / 3;//縦
-    [UIView animateWithDuration:0.1f animations:^{
-        subView.frame = CGRectMake(120*colomn+17, 120*row+10, 100, 100);
-    }];
-}
-- (void)tapAction:(id)sender {
-    NSLog(@"age:%@",array);
-    NSLog(@"LOG:%ld",array.count);
-    UITapGestureRecognizer *tap = sender;
-    [tap.view removeFromSuperview];
-    // tap.viewとarrayの中身のインスタンスが一緒だったら削除する
-    //TODO: 配列のインデックスを探して、つめる
-    NSUInteger index = [array indexOfObject:tap.view];
-    if (index != NSNotFound) { // yes
-        NSLog(@"%lu番目にありました．", index);
-        //全部消して
-        [array removeObject:tap.view];
-        //再度add
-        for (int i = 0; i < array.count; i++) {
-            UIView *subView = array[i];
-            [self reuseView:i subView:subView];
-            [self.view addSubview:subView];
-        }
-    }
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+# pragma - mark それぞれのButton
 - (IBAction)timer_custom_viewview{//タイマーcell
     //    count=arc4random_uniform(9);
-    int arrayNum = (int)array.count;
+    int arrayNum = (int)cell_array.count;
     int colomn = arrayNum % 3;
     int row = arrayNum / 3;
     timer_custom_view *subview = [[NSBundle mainBundle] loadNibNamed:@"timer_custom_view" owner:self options:nil][0];
@@ -128,7 +98,7 @@
     tap.numberOfTapsRequired = 2;//ダブルタップ
     [subview addGestureRecognizer:tap];
     //-------------------------
-    [array addObject:subview];
+    [cell_array addObject:subview];
     [self archiveSubview];
     //    [self seiretu];
     [self setRandomColor:subview];
@@ -136,7 +106,7 @@
     [self.view addSubview:subview];
 }
 - (IBAction)add_memo_custom_view{//メモcell
-    int arrayNum = (int)array.count;
+    int arrayNum = (int)cell_array.count;
     int colomn = arrayNum % 3;
     int row = arrayNum / 3;
     
@@ -147,7 +117,7 @@
     tap.numberOfTapsRequired = 2;
     [subview addGestureRecognizer:tap];
     //-------------------------
-    [array addObject:subview];
+    [cell_array addObject:subview];
     [self archiveSubview];
     //    [self seiretu];
     [self setRandomColor:subview];
@@ -156,15 +126,8 @@
     
     
 }
-//写真を選択し終わった時に呼び出されるdelegateメソッド
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    //生成するphoto_custom_viewのUIImageViewに選んだ写真をセットしているよ！
-    [photoSubView.photoImageView setImage:info[UIImagePickerControllerOriginalImage]];
-}
 - (IBAction)photo_custom_view{//フォトcell
-    int arrayNum = (int)array.count;
+    int arrayNum = (int)cell_array.count;
     int colomn = arrayNum % 3;
     int row = arrayNum / 3;
     
@@ -175,11 +138,48 @@
     tap.numberOfTapsRequired = 2;
     [photoSubView addGestureRecognizer:tap];
     [self getting_photo];
-    [array addObject:photoSubView];
+    [cell_array addObject:photoSubView];
     [self archiveSubview];
     [self setRandomColor:photoSubView];
     [self find_add_size];
     [self.view addSubview:photoSubView];
+}
+# pragma - mark UIImagePickerDelegate
+//写真を選択し終わった時に呼び出されるdelegateメソッド
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    //生成するphoto_custom_viewのUIImageViewに選んだ写真をセットしているよ！
+    [photoSubView.photoImageView setImage:info[UIImagePickerControllerOriginalImage]];
+}
+# pragma - mark それぞれのButtonで扱う処理
+- (void)reuseView:(int)arrayCount subView:(UIView *)subView {
+    //iを3で割った,余りが行列となる
+    int colomn =  arrayCount % 3;//横
+    int row = arrayCount / 3;//縦
+    [UIView animateWithDuration:0.1f animations:^{
+        subView.frame = CGRectMake(120*colomn+17, 120*row+10, 100, 100);
+    }];
+}
+- (void)tapAction:(id)sender {
+    NSLog(@"age:%@",cell_array);
+    NSLog(@"LOG:%ld",cell_array.count);
+    UITapGestureRecognizer *tap = sender;
+    [tap.view removeFromSuperview];
+    // tap.viewとarrayの中身のインスタンスが一緒だったら削除する
+    //TODO: 配列のインデックスを探して、つめる
+    NSUInteger index = [cell_array indexOfObject:tap.view];
+    if (index != NSNotFound) { // yes
+        NSLog(@"%lu番目にありました．", index);
+        //全部消して
+        [cell_array removeObject:tap.view];
+        //再度add
+        for (int i = 0; i < cell_array.count; i++) {
+            UIView *subView = cell_array[i];
+            [self reuseView:i subView:subView];
+            [self.view addSubview:subView];
+        }
+    }
 }
 -(void)getting_photo{
     UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
