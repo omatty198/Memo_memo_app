@@ -30,7 +30,7 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-    second=0;
+    second=5;
     minute=0;
     hour=0;
     [super viewDidLoad];
@@ -120,7 +120,8 @@
     int arrayNum = (int)array.count;
     int colomn = arrayNum % 3;
     int row = arrayNum / 3;
-    timer_custom_view *subview = [timer_custom_view view];
+    timer_custom_view *subview = [[NSBundle mainBundle] loadNibNamed:@"timer_custom_view" owner:self options:nil][0];
+    subview.second = 5;
     subview.frame = CGRectMake(120 * colomn + 17, 120 * row + 10, 100, 100);
     //-------------------------
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];

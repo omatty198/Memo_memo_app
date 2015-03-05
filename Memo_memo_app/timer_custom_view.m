@@ -40,13 +40,34 @@
     if (sender.selected) {
         timer_cell=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(second_up) userInfo:nil repeats:YES];
         NSLog(@"yes");
+        //self.second = 2;
+
     } else {
         NSLog(@"no");
         [timer_cell invalidate];
     }
 }
 -(void)second_up{
-    self.second++;
+    self.second--;
     self.time_label.text=[NSString stringWithFormat:@"%d",self.second];
+    //TODO: アプリを終了した時はsecondが消えてしまうので、
+    //NSTimerを使うのではなく、NSDate isTimerInterval等で設定した方が良い
+    if (self.second == 0) {
+        // 設定する前に、設定済みの通知をキャンセルする
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        // 設定し直す
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        //1秒後に通知
+        NSDate *after3 = [NSDate dateWithTimeIntervalSinceNow:1.0];
+        localNotification.fireDate = after3;
+        localNotification.alertBody = @"Fire!";
+        localNotification.timeZone = [NSTimeZone localTimeZone];
+        //FIX: soundNameは自分で用意した音でも30秒以内なら可能
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        localNotification.alertAction = @"OPEN";
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        //timer止める
+        [timer_cell invalidate];
+    }
 }
 @end

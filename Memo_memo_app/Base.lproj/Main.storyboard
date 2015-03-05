@@ -28,19 +28,8 @@
                                     <action selector="photo_custom_view" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2dc-dk-tf5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DrW-4r-7lY">
-                                <rect key="frame" x="16" y="580" width="74" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Timer">
-                                    <color key="titleColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="timer_custom_viewview" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4MY-Yb-uP0"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="EDW-aJ-L9B">
-                                <rect key="frame" x="16" y="20" width="343" height="542"/>
+                                <rect key="frame" x="15" y="20" width="343" height="168"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wIz-5r-iUn">
@@ -52,6 +41,17 @@
                                 </state>
                                 <connections>
                                     <action selector="add_memo_custom_view" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Erq-PD-FQv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DrW-4r-7lY">
+                                <rect key="frame" x="21" y="209" width="74" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.17000000000000001" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Timer">
+                                    <color key="titleColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="timer_custom_viewview" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4MY-Yb-uP0"/>
                                 </connections>
                             </button>
                         </subviews>
