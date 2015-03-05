@@ -86,9 +86,9 @@
     NSString *filePath = [directory stringByAppendingPathComponent:@"data.dat"];
     BOOL successful = [NSKeyedArchiver archiveRootObject:cell_array toFile:filePath];
     if (successful) {
-        NSLog(@"データの保存に成功しました");
+        NSLog(@"Archiver:データの保存に成功しました");
     } else {
-        NSLog(@"データの保存に失敗しました");
+        NSLog(@"Archiver:データの保存に失敗しました");
     }
 }
 
@@ -147,10 +147,9 @@
     tap.numberOfTapsRequired = 2;
     [photoSubView addGestureRecognizer:tap];
     [self getting_photo];
-    [cell_array addObject:photoSubView];
-    [self archiveSubview];
-    [self setRandomColor:photoSubView];
+    
     [self find_add_size];
+    [cell_array addObject:photoSubView];
     [self.view addSubview:photoSubView];
 }
 # pragma - mark UIImagePickerDelegate
@@ -160,6 +159,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     //生成するphoto_custom_viewのUIImageViewに選んだ写真をセットしているよ！
     [photoSubView.photoImageView setImage:info[UIImagePickerControllerOriginalImage]];
+    [self archiveSubview];
 }
 # pragma - mark それぞれのButtonで扱う処理
 - (void)reuseView:(int)arrayCount subView:(UIView *)subView {
@@ -219,30 +219,17 @@
     size_y=[UIScreen mainScreen].bounds.size.height;
     if([UIScreen mainScreen].bounds.size.height == 568.0)
     {
-        self->scroll_view.contentSize = CGSizeMake(320, 568 /* +subview.frame.size.height*/);//コメントアウトしたところの意味を教えてください。あと、self.scroll_viewでアラートが出たんでself->scroll_viewに変えました。それからsubviewがないよーって言われたんでscroll_viewをいれました。
+        scroll_view.contentSize = CGSizeMake(320, 568 /* +subview.frame.size.height*/);
+        //コメントアウトしたところの意味を教えてください。
+        //->ぐぐろう omatty
+        //あと、self.scroll_viewでアラートが出たんでself->scroll_viewに変えました。それからsubviewがないよーって言われたんでscroll_viewをいれました。
+        //->意味ないっす omatty
     }else if ([UIScreen mainScreen].bounds.size.height == 667.0) {//iphone6のとき
-        self->scroll_view.contentSize = CGSizeMake(375, 667 /* +subview.frame.size.height*/);
+        scroll_view.contentSize = CGSizeMake(375, 667 /* +subview.frame.size.height*/);
     }else if ([UIScreen mainScreen].bounds.size.height == 736.0) {//iphone6+のとき
-        self->scroll_view.contentSize = CGSizeMake(414,736 /* +subview.frame.size.height*/);
+        scroll_view.contentSize = CGSizeMake(414,736 /* +subview.frame.size.height*/);
         NSLog(@"%d",size_x);
     }
     
 }
-- (void)hogehoge:(timer_custom_view *)timerView {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 19, 96, 35)];
-    label.text = @"5";
-    timerView.time_label = label;
-    [timerView addSubview:label];
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(34, 62, 33, 30)];
-    [button setTitle:@"START" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(hoge:) forControlEvents:UIControlEventTouchUpInside];
-    timerView.timer_button = button;
-    [timerView addSubview:button];
-}
-//-(void)second_up{
-//    timer_custom_view sec
-//}
-//- (IBAction)timerButton:(id)senderButton {
-//    
-//}
 @end

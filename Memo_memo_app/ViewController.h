@@ -10,7 +10,7 @@
 
 @interface ViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UITextFieldDelegate>
 {
-    UIScrollView *scroll_view;
+    IBOutlet UIScrollView *scroll_view;
     int hour;
     int minute;
     int second;
