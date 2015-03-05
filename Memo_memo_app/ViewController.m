@@ -48,12 +48,24 @@
         for (NSObject *object in array2) {
             if ([object isKindOfClass:[timer_custom_view class]]) {
                 NSLog(@"timerCutstomView objectです");
-                //TODO: 中身を復旧させる
-                [self.view addSubview:(timer_custom_view *)object];
+                timer_custom_view *imgCopy = (timer_custom_view *)object;
+                NSLog(@"%@, %@", imgCopy, NSStringFromCGSize(imgCopy.frame.size));
+                //TODO: buttonが機能をなしていない
+                [self hogehoge:imgCopy];
+                //[imgCopy.timer_button addTarget:self action:@selector(hoge:) forControlEvents:UIControlEventTouchUpInside];
+                [self.view addSubview:imgCopy];
+                NSString *str = [NSString stringWithFormat:@"Size:%@",NSStringFromCGSize(imgCopy.frame.size)];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"AlertView"
+                                                                    message:str
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"いいえ"
+                                                          otherButtonTitles:nil, nil];
+                [alertView show];
             } else if ([object isKindOfClass:[PhotoCustomView class]]) {
                 NSLog(@"PhotoCustomView objectです");
+                //TODO: 中身を復旧させる
                 [self.view addSubview:(PhotoCustomView *)object];
-            } else if ([object isKindOfClass:[NSString class]]) {
+            } else if ([object isKindOfClass:[NSString class]]) {//NSStringではなく、memo_custom_view
                 
             } else {
                 NSLog(@"不明なobjectです");
@@ -62,9 +74,11 @@
     } else {
         NSLog(@"%@", @"データが存在しません。");
     }
-    NSString *str = [NSString stringWithFormat:@"%ld",array2.count];
+
+}
+- (void)hoge:(UIButton *)button{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"AlertView"
-                                                        message:str
+                                                        message:@"age"
                                                        delegate:self
                                               cancelButtonTitle:@"いいえ"
                                               otherButtonTitles:nil, nil];
@@ -219,5 +233,15 @@
     }
     
 }
-
+- (void)hogehoge:(timer_custom_view *)timerView {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 19, 96, 35)];
+    label.text = @"5";
+    timerView.time_label = label;
+    [timerView addSubview:label];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(34, 62, 33, 30)];
+    [button setTitle:@"START" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(hoge:) forControlEvents:UIControlEventTouchUpInside];
+    timerView.timer_button = button;
+    [timerView addSubview:button];
+}
 @end
